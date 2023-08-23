@@ -1,26 +1,27 @@
-/*global chrome*/
-
-var starturl = `https://friends.roblox.com/v1/my/friends/requests?limit=100&sortOrder=Desc`;
-//var cursorurl = `https://friends.roblox.com/v1/my/friends/requests?limit=100&cursor=${cursor}&sortOrder=Desc`
-
-//required for the api to actually work
-var userCookie = document.cookie
-const requestOptions = {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json',
-        'Cookie': userCookie
-    }
-}
-var test = chrome.cookies.getAll({domain: origin})
-
-console.log(test)
-
-fetch(starturl, requestOptions)
-.then(response => response.json())
-.then(data => {
-    console.log(data);
-})
-.catch(error => {
-    console.log('friend request get error:', error);
-})
+waitForElm(".notification-blue.notification").then((elm) => {
+    elm.innerHTML = "Loading..."
+    chrome.runtime.sendMessage({ action: "start" }, function (response) {
+      elm.innerHTML = response.req;
+    });
+  });
+  
+  function waitForElm(selector) {
+    return new Promise((resolve) => {
+      if (document.querySelector(selector)) {
+        return resolve(document.querySelector(selector));
+      }
+  
+      const observer = new MutationObserver((mutations) => {
+        if (document.querySelector(selector)) {
+          resolve(document.querySelector(selector));
+          observer.disconnect();
+        }
+      });
+  
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+    });
+  }
+  
