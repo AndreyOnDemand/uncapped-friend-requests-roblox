@@ -15,7 +15,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       if (rawCookie) {
         // Remove the trailing space and semicolon
         rawCookie = rawCookie.slice(0, -2);
-        console.log("Raw Cookie:", rawCookie);
+        //console.log("Raw Cookie:", rawCookie);
 
         fetchRequests(cursorurl); // Start fetching requests
       } else {
