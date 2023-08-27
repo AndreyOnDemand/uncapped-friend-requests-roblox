@@ -1,3 +1,5 @@
+# uncapped-friend-requests-roblox
+
 This extension uncaps your Roblox friend requests from 500.
 
 Not recommended to those who may have an extensive friend request list (100,000+) as it may slow down.
